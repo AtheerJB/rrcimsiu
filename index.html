@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نادي الروبوت والرياضات</title>
+    <style>
+        /* فيديو الخلفية */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Almarai', sans-serif; /* استخدام خط Almarai */
+            color: white;
+            z-index: 1;
+            position: relative;
+        }
+
+        header {
+            background-color: rgba(21, 0, 43, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-left: 15px;
+        }
+
+        .club-title {
+            display: flex;
+            color: #fff;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .club-title strong {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ترحيب */
+        .hero-welcome {
+            padding: 30px 40px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to right, #2a00f6, #c600d6);
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            text-align: right; /* محاذاة النص إلى اليمين */
+        }
+
+        .hero-text {
+            max-width: 600px;
+            text-align: right;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            line-height: 1.5; /* تحسين تباعد الأسطر */
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            line-height: 1.5; /* تحسين تباعد الأسطر */
+        }
+
+        .hero-button {
+            display: inline-block;
+            background-color: rgb(255, 255, 255);
+            color: #000b5f;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .hero-button:hover {
+            background-color: #eee;
+        }
+
+        /* قيم النادي */
+        .values-section {
+            background-color: #f7f7f7; /* لون خلفية موحد */
+            padding: 20px 40px;
+            color: #003049; /* لون النص */
+        }
+
+        .values-title {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-align: right;
+            border-right: 7px solid #2e1f5c;
+            padding-right: 15px;
+        }
+
+        .values-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .value-item {
+            width: 200px;
+            background-color: #ffffff;
+            color: #003049;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        .value-item img {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .value-item p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .divider {
+            width: 1px;
+            height: 80px;
+            background-color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; /* تغيير اتجاه الهيدر */
+                align-items: flex-start; /* محاذاة العناصر */
+            }
+
+            nav ul {
+                flex-direction: column; /* جعل الروابط عمودية */
+                gap: 10px; /* تقليل الفراغ بين الروابط */
+            }
+
+            .hero-text h1 {
+                font-size: 30px; /* تقليل حجم العنوان */
+            }
+
+            .hero-text p {
+                font-size: 16px; /* تقليل حجم النص */
+            }
+
+            .values-container {
+                flex-direction: column; /* جعل العناصر عمودية */
+                align-items: center; /* محاذاة العناصر في الوسط */
+            }
+
+            .field-card {
+                flex: 0 0 100%; /* جعل بطاقات المجالات تأخذ عرض كامل */
+            }
+
+            .event-card {
+                flex: 1 0 100%; /* جعل بطاقات الفعاليات تأخذ عرض كامل */
+            }
+        }
+
+        /* مجالات النادي */
+        .fields-section {
+            background-color: #f7f7f7; /* لون خلفية موحد */
+            color: #003049; /* لون النص */
+            padding: 20px 40px;
+            overflow: hidden;
+        }
+
+        .fields-title {
+            font-size: 25px;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 40px;
+            border-right: 7px solid #2e1f5c;
+            padding-right: 15px;
+        }
+
+        .fields-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 20px;
+        }
+
+        .fields-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .field-card {
+            flex: 0 0 300px;
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            min-height: 250px;
+        }
+
+        .field-card img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .field-card h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #003049;
+        }
+
+        .field-card ul {
+            text-align: right;
+            padding-right: 20px;
+            margin-top: 15px;
+            color: #003049;
+        }
+
+        .field-card ul li {
+            font-size: 20px;
+            margin-bottom: 8px;
+            list-style-type: disc;
+        }
+
+        /* أحدث الفعاليات */
+        .events-section {
+            background-color: #f7f7f7; /* لون خلفية موحد */
+            padding: 20px 40px;
+            color: #003049; /* لون النص */
+            border-radius: 0px; /* إضافة زوايا دائرية */
+        }
+
+        .events-title {
+            font-size: 25px; /* حجم الخط */
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 40px;
+            border-right: 7px solid #2e1f5c;
+            padding-right: 15px;
+        }
+
+        .events-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* زيادة الفراغ بين البطاقات */
+            justify-content: center; /* مركز البطاقات */
+        }
+
+        .event-card {
+            flex: 1 0 300px; /* ضبط العرض */
+            background-color: #fff; /* لون الخلفية للبطاقة */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* تحسين الظل */
+            padding: 20px;
+            text-align: right; /* محاذاة النص إلى اليمين */
+            transition: transform 0.3s, box-shadow 0.3s; /* تأثير عند التمرير */
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px); /* رفع البطاقة عند التمرير */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* زيادة الظل عند التمرير */
+        }
+
+        .event-card img {
+            width: 100%; /* جعل الصورة تغطي العرض بالكامل */
+            height: 200px; /* تحديد ارتفاع ثابت لجميع الصور */
+            object-fit: cover; /* الحفاظ على نسبة العرض إلى الارتفاع */
+            border-radius: 10px; /* زوايا دائرية */
+        }
+
+        .event-card h4 {
+            margin: 10px 0;
+            font-size: 20px; /* حجم الخط */
+            color: #282245; /* لون العنوان */
+        }
+
+        .event-card p {
+            font-size: 16px;
+            line-height: 1.6; /* تحسين تباعد الأسطر */
+        }
+
+        /* التذييل */
+        .footer {
+            background: linear-gradient(to right, #2a00f6, #c600d6);
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .footer-credit {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- فيديو الخلفية -->
+<video autoplay muted loop id="bg-video">
+    <source src="background.mp4" type="video/mp4">
+    المتصفح لا يدعم تشغيل الفيديو.
+</video>
+
+<!-- الهيدر -->
+<header>
+    <div class="logo-section">
+        <img src="logo.png" alt="شعار النادي" class="logo" />
+        <div class="club-title">
+            <strong>نادي الروبوت والرياضات</strong>
+            <span>Robotic & Sports Club</span>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="About.html">عن النادي</a></li>
+            <li><a href="structure.html">الهيكل التنظيمي</a></li>
+            <li><a href="knowledge.html">مركز المعرفة</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdx5p4Hj3xFiVC2QBmPi4hGZZ8UgWne5fI80uSCJuh8RfKg-Q/viewform" target="_blank">انضم إلينا</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ترحيب -->
+<section class="hero-welcome" id="home">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1>نادي الروبوت والرياضات يرحب بكم</h1>
+            <p>نادي بجامعة الإمام محمد بن سعود الإسلامية</p>
+            <p>نهدف لتطوير المهارات التقنية في مجال الروبوتات والرياضات الإلكترونية واللاسلكية داخل بيئة محفزة للإبداع</p>
+            <a href="join.html" class="hero-button">انضم إلينا</a>
+        </div>
+    </div>
+</section>
+
+<!-- قيم النادي -->
+<section class="values-section" id="values">
+    <div class="values-title">قيم النادي</div>
+    <div class="values-container">
+        <div class="value-item"><img src="transparency.png" /><p>الشفافية</p></div>
+        <div class="divider"></div>
+        <div class="value-item"><img src="honesty.png" /><p>الصدق والأمانة</p></div>
+        <div class="divider"></div>
+        <div class="value-item"><img src="balance.png" /><p>العدل والمساواة</p></div>
+        <div class="divider"></div>
+        <div class="value-item"><img src="onboarding.png" /><p>التنمية والتعلم</p></div>
+    </div>
+</section>
+
+<!-- مجالات النادي -->
+<section class="fields-section" id="fields">
+    <div class="fields-title">مجالات النادي</div>
+    <div class="fields-container" id="scroll-container">
+        <div class="field-card">
+            <img src="robot.png" />
+            <h3>تقنيات الروبوت</h3>
+            <ul>
+                <li>الروبوتات</li>
+                <li>البرمجة والذكاء الاصطناعي</li>
+                <li>الإدارة الرقمية</li>
+            </ul>
+        </div>
+        <div class="field-card">
+            <img src="wireless.png" />
+            <h3>الرياضات اللاسلكية</h3>
+            <ul>
+                <li>السيارات اللاسلكية</li>
+                <li>الطائرات اللاسلكية</li>
+                <li>الزوارق اللاسلكية</li>
+            </ul>
+        </div>
+        <div class="field-card">
+            <img src="cultural.png" />
+            <h3>التعليم والثقافة</h3>
+            <ul>
+                <li>الدورات</li>
+                <li>المعارض والفعاليات العلمية</li>
+                <li>المسابقات الثقافية</li>
+            </ul>
+        </div>
+        <div class="field-card">
+            <img src="media.png" />
+            <h3>الإعلام</h3>
+            <ul>
+                <li>العلاقات العامة</li>
+                <li>التغطية</li>
+                <li>السوشيال ميديا</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- أحدث الفعاليات -->
+<section class="events-section" id="events">
+    <div class="events-title">أحدث الفعاليات والأخبار</div>
+    <div class="events-container">
+        <div class="event-card">
+            <img src="فعالية1ب.jpg" alt="زيارة ميدانية للاتحاد السعودي للرياضات الالكترونية" />
+            <h4>زيارة ميدانية للاتحاد السعودي للرياضات الالكترونية</h4>
+            <p>تاريخ: 24 مايو 2025</p>
+        </div>
+        <div class="event-card">
+            <img src="جائزة.jpg" alt="نادي الروبوت والرياضات يحصد جائزة التميز في أولى مشاركاته لعام 1446هـ" />
+            <h4>نادي الروبوت والرياضات يحصد جائزة التميز في أولى مشاركاته لعام 1446هـ</h4>
+            <p>تاريخ: 14 مايو 2025</p>
+        </div>
+        <div class="event-card">
+            <img src="أكاديمية Apple .jpg" alt="نادي الروبوت والرياضات يخوض تجربة استثنائية في أكاديمية Apple للمطورين" />
+            <h4>نادي الروبوت والرياضات يخوض تجربة استثنائية في أكاديمية Apple للمطورين</h4>
+            <p>تاريخ: 1 مايو 2025</p>
+        </div>
+    </div>
+</section>
+
+ <!-- التذييل -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>نظرة عامة</h4>
+        <ul>
+          <li><a href="About.html">عن النادي</a></li>
+          <li><a href="#">الهيكل التنظيمي</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>الدعم والمساعدة</h4>
+        <ul>
+          <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>روابط مهمة</h4>
+        <ul>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdx5p4Hj3xFiVC2QBmPi4hGZZ8UgWne5fI80uSCJuh8RfKg-Q/viewform" target="_blank">انضم إلينا</a></li>
+          <li><a href="knowledge.html">مركز المعرفة</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>تابعونا على</h4>
+        <div class="social-icons">
+          <a href="https://x.com/RRC_IMSIU" target="_blank"><img src="X-Logo.jpg" alt="X"></a>
+          <a href="https://www.instagram.com/rrc_imsiu/" target="_blank"><img src="Insta-icon.svg" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/in/rrc-imsiu/" target="_blank"><img src="linkedin-icon.svg" alt="LinkedIn"></a>
+          <a href="https://www.tiktok.com/@rrc_imsiu" target="_blank"><img src="TikTok-icon.svg" alt="TikTok"></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-credit">Made with ❤️ by Atheer Alshahrani</p>
+  </footer>

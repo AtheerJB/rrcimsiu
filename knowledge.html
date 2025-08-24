@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مركز المعرفة - نادي الروبوت والرياضات</title>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        /* الهيدر */
+        header {
+            background-color: rgba(21, 0, 43, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-left: 15px;
+        }
+
+        .club-title {
+            display: flex;
+            color: #fff;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .club-title strong {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* محتوى مركز المعرفة */
+        .knowledge-container {
+            background-color: #f7f7f7; 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; 
+            justify-content: space-between;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .knowledge-title {
+            font-size: 25px; 
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 40px;
+            border-right: 7px solid #2e1f5c;
+            padding-right: 15px;
+        }
+
+        .knowledge-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 10px;
+            width: calc(45% - 20px);
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .knowledge-card {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+
+        .knowledge-card h2 {
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 5px;
+        }
+
+        /* قسم المنشورات */
+        .posts-section {
+            background-color: #f7f7f7; 
+            padding: 20px 40px;
+            color: #003049; 
+            border-radius: 0px;
+        }
+
+        .posts-title {
+            font-size: 25px; 
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 40px;
+            border-right: 7px solid #2e1f5c;
+            padding-right: 15px;
+        }
+
+        .posts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; 
+        }
+
+        .posts-card {
+            flex: 1 0 300px; 
+            background-color: #fff; 
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: right; 
+            transition: transform 0.3s, box-shadow 0.3s; 
+        }
+
+        .posts-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+        }
+
+        .posts-card img {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+        }
+
+        .posts-card h4 {
+            margin: 10px 0;
+            font-size: 20px; 
+            color: #282245; 
+        }
+
+        .posts-card p {
+            font-size: 16px;
+            line-height: 1.6; 
+        }
+
+        /* نافذة البوب */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 350px; /* عرض أصغر */
+    width: 50%; /* عرض النسخة الصغيرة */
+    text-align: right;
+}
+
+        .close {
+            cursor: pointer;
+            color: red;
+            float: right;
+            font-size: 20px;
+        }
+
+        .modal-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* التذييل */
+        .footer {
+            background: linear-gradient(to right, #2a00f6, #c600d6);
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .footer-credit {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-section">
+        <img src="logo.png" alt="شعار النادي" class="logo" />
+        <div class="club-title">
+            <strong>نادي الروبوت والرياضات</strong>
+            <span>Robotic & Sports Club</span>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="About.html">عن النادي</a></li>
+            <li><a href="structure.html">الهيكل التنظيمي</a></li>
+            <li><a href="knowledge.html">مركز المعرفة</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdx5p4Hj3xFiVC2QBmPi4hGZZ8UgWne5fI80uSCJuh8RfKg-Q/viewform" target="_blank">انضم إلينا</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="knowledge-container">
+    <div class="knowledge-card">
+        <div class="knowledge-title"><h2>المجلة العلمية الروبوتية</h2></div>
+        <div class="button-container">
+            <button onclick="window.open('///C:/Users/athee/Desktop/Robotic%20&%20RC%20Sports/index.html/file.pdf.pdf', '_blank')" class="button view-button">
+                <img src="view.png" alt="عرض" class="button-icon"> 
+                عرض الملف
+            </button>
+            <button onclick="window.open('///C:/Users/athee/Desktop/Robotic%20&%20RC%20Sports/index.html/file.pdf.pdf', '_blank')" class="button download-button">
+                <img src="download.png" alt="تحميل" class="button-icon"> 
+                تحميل الملف
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- قسم المنشورات -->
+<div class="posts-section">
+    <div class="posts-title">المنشورات</div>
+    <div class="posts-container">
+        <div class="posts-card" onclick="openModal('مستقبل الروبوت والانسان', '', 'مستقبل  الروبوت والانسان 1.jpg', 'modal')">
+            <img src="مستقبل  الروبوت والانسان 1.jpg" alt="مستقبل الروبوت والانسان" />
+            <h4>مستقبل الروبوت والانسان</h4>
+            <p>تاريخ: 24 مايو 2025</p>
+        </div>
+        <div class="posts-card" onclick="openModal('مستقبل الروبوتات في المجالات', '', 'مستقبل الروبوتات في المجالات.jpg', 'modal2')">
+            <img src="مستقبل الروبوتات في المجالات.jpg" alt="مستقبل الروبوتات في المجالات" />
+            <h4>مستقبل الروبوتات في المجالات</h4>
+            <p>تاريخ: 11 يونيو 2025</p>
+        </div>
+    </div>
+</div>
+
+<!-- نافذة البوب الأولى -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal')">&times;</span>
+        <h4 id="modal-title"></h4>
+        <p id="modal-content"></p>
+        <img id="modal-image" class="modal-img" src="" alt="صورة المنشور" />
+    </div>
+</div>
+
+<!-- نافذة البوب الثانية -->
+<div class="modal" id="modal2">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <h4 id="modal2-title"></h4>
+        <p id="modal2-content"></p>
+        <img id="modal2-image" class="modal-img" src="" alt="صورة المنشور" />
+    </div>
+</div>
+
+<script>
+    function openModal(title, content, imgSrc, modalId) {
+        document.getElementById(modalId + '-title').innerText = title;
+        document.getElementById(modalId + '-content').innerText = content;
+        document.getElementById(modalId + '-image').src = imgSrc; // استخدم imgSrc
+        document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    // إغلاق النافذة عند النقر خارج المحتوى
+    window.onclick = function(event) {
+        const modals = ['modal', 'modal2'];
+        modals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                closeModal(modalId);
+            }
+        });
+    }
+</script>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h4>نظرة عامة</h4>
+            <ul>
+                <li><a href="About.html">عن النادي</a></li>
+                <li><a href="#">الهيكل التنظيمي</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>الدعم والمساعدة</h4>
+            <ul>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>روابط مهمة</h4>
+            <ul>
+                <li><a href="join.html">انضم إلينا</a></li>
+                <li><a href="knowledge.html">مركز المعرفة</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>تابعونا على</h4>
+            <div class="social-icons">
+                <a href="https://x.com/RRC_IMSIU" target="_blank"><img src="X-Logo.jpg" alt="X"></a>
+                <a href="https://www.instagram.com/rrc_imsiu/" target="_blank"><img src="Insta-icon.svg" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/rrc-imsiu/" target="_blank"><img src="linkedin-icon.svg" alt="LinkedIn"></a>
+                <a href="https://www.tiktok.com/@rrc_imsiu" target="_blank"><img src="TikTok-icon.svg" alt="TikTok"></a>
+            </div>
+        </div>
+    </div>
+    <p class="footer-credit">Made with ❤️ by Atheer Alshahrani</p>
+</footer>
+
+</body>
+</html>
