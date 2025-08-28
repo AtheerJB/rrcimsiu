@@ -179,38 +179,98 @@
             background-color: #ccc;
         }
 
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column; /* تغيير اتجاه الهيدر */
-                align-items: flex-start; /* محاذاة العناصر */
-            }
+       
+        /* للجوال (أصغر من 600px) */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
 
-            nav ul {
-                flex-direction: column; /* جعل الروابط عمودية */
-                gap: 10px; /* تقليل الفراغ بين الروابط */
-            }
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 10px;
+  }
 
-            .hero-text h1 {
-                font-size: 30px; /* تقليل حجم العنوان */
-            }
+  .hero-text h1 {
+    font-size: 26px;
+  }
 
-            .hero-text p {
-                font-size: 16px; /* تقليل حجم النص */
-            }
+  .hero-text p {
+    font-size: 15px;
+  }
 
-            .values-container {
-                flex-direction: column; /* جعل العناصر عمودية */
-                align-items: center; /* محاذاة العناصر في الوسط */
-            }
+  .value-item {
+    width: 100%;
+  }
 
-            .field-card {
-                flex: 0 0 100%; /* جعل بطاقات المجالات تأخذ عرض كامل */
-            }
+  .fields-container {
+    flex-direction: column;
+    gap: 15px;
+  }
 
-            .event-card {
-                flex: 1 0 100%; /* جعل بطاقات الفعاليات تأخذ عرض كامل */
-            }
-        }
+  .field-card {
+    flex: 0 0 100%;
+  }
+
+  .events-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .event-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* للأيباد (من 601px إلى 991px تقريبًا) */
+@media (min-width: 601px) and (max-width: 991px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-text p {
+    font-size: 18px;
+  }
+
+  .values-container {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .field-card {
+    flex: 0 0 45%; /* خلي بطاقتين جنب بعض */
+  }
+
+  .event-card {
+    flex: 1 0 45%; /* خلي بطاقتين جنب بعض */
+  }
+
+  .footer-container {
+    justify-content: center;
+    gap: 30px;
+  }
+}
 
         /* مجالات النادي */
         .fields-section {
